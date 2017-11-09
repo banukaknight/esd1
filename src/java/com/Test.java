@@ -3,7 +3,7 @@ package com;
 
 import java.io.*;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -45,6 +45,10 @@ public class Test extends HttpServlet {
             out.println("<br><h1>Payments</h1>");
             for(Payment p : payments)
                 out.println("<p>" + p.toString() + "</p>");
+            //b.addUser(new User("id", "pw", "status"));
+            //b.addClaim(new Claim(34334, "id", new Date(1,1,1), "rat", "stat", 324.2 ));
+            //b.addMember(new Member("id", "name", "add", new Date(1,2,3), new Date(3,2,1), "stat", 123.1));
+            //b.addPayment(new Payment(3453, "id", "payment", 234.22, new Date(12,3,4), new Time(1,2,3)));
             out.println("</body>");
             out.println("</html>");
         }
