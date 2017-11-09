@@ -37,7 +37,22 @@ public class Test extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Claims</h1>");
             
-            //EXAMPLE CODE FOR EACH TABLE
+            
+            //EXAMPLE CODE TO ADD NEW RECORDS
+
+            b.addUser(new User("id", "pw", "status"));
+            b.addClaim(new Claim(34334, "id", new Date(1,1,1), "rat", "stat", 324.2 ));
+            b.addMember(new Member("id", "name", "add", new Date(1,2,3), new Date(3,2,1), "stat", 123.1));
+            b.addPayment(new Payment(3453, "id", "payment", 234.22, new Date(12,3,4), new Time(1,2,3)));
+            
+            //EXAMPLE CODE TO UPDATE RECORDS
+            
+            b.updateUser(new User("id", "pw123", "status123"));
+            b.updateClaim(new Claim(34334, "id", new Date(1,2,3), "rat", "stat", 3123.2 ));
+            b.updateMember(new Member("id", "name", "add", new Date(1,12,3), new Date(3,12,1), "stat", 1123123.1));
+            b.updatePayment(new Payment(3453, "id", "pa112312", 234.22, new Date(12,3,4), new Time(1,2,3)));
+            
+            //EXAMPLE CODE TO VIEW EACH TABLE
             
             for(Claim c : claims)
                 out.println("<p>" + c.toString() + "</p>");
@@ -51,13 +66,6 @@ public class Test extends HttpServlet {
             for(Payment p : payments)
                 out.println("<p>" + p.toString() + "</p>");
 
-            //EXAMPLE CODE TO ADD NEW RECORDS
-
-            b.addUser(new User("id", "pw", "status"));
-            b.addClaim(new Claim(34334, "id", new Date(1,1,1), "rat", "stat", 324.2 ));
-            b.addMember(new Member("id", "name", "add", new Date(1,2,3), new Date(3,2,1), "stat", 123.1));
-            b.addPayment(new Payment(3453, "id", "payment", 234.22, new Date(12,3,4), new Time(1,2,3)));
-            
             out.println("</body>");
             out.println("</html>");
         }

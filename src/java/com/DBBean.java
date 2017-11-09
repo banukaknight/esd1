@@ -3,10 +3,9 @@ package com;
 
 import java.sql.*;
 import java.util.ArrayList;
-import org.apache.derby.jdbc.*;
 
-public class DBBean {
-    
+public class DBBean 
+{
     Connection connection = null;
     
     public DBBean(String db, String username, String password) throws SQLException 
@@ -19,11 +18,11 @@ public class DBBean {
         catch(Exception e){ System.out.println("Could not connect to database. " + e); }
     } 
     
-    ResultSet selectAll(String table){
+    ResultSet selectAll(String table)
+    {
         Statement statement;
         ResultSet rs = null;
         try {
-            System.out.println("Requested");
             statement = connection.createStatement();
             rs = statement.executeQuery(String.format("SELECT * FROM %s", table));
 
@@ -68,7 +67,8 @@ public class DBBean {
         return members;
     }
     
-    public boolean addClaim(Claim c){
+    public boolean addClaim(Claim c)
+    {
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("INSERT INTO CLAIMS VALUES (?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
@@ -81,7 +81,7 @@ public class DBBean {
             ps.executeUpdate();      
             ps.close();
             return true;
-        } catch (Exception e) {System.out.println("Record already extists");}
+        } catch (Exception e) {System.out.println("User record already extists");}
         return false;
     }
     
@@ -100,7 +100,7 @@ public class DBBean {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (Exception e) {System.out.println("Record already extists");}
+        } catch (Exception e) {System.out.println("User record already extists");}
         return false;
     }
     
@@ -118,7 +118,7 @@ public class DBBean {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (Exception e) {System.out.println("Record already extists");}
+        } catch (Exception e) {System.out.println("User record already extists");}
         return false;
     }
     
@@ -133,7 +133,73 @@ public class DBBean {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (Exception e) {System.out.println("Record already extists");}
+        } catch (Exception e) {System.out.println("User record already exists");}
+        return false;
+    }
+    
+    public boolean updateClaim(Claim c)
+    {
+        try{
+            PreparedStatement ps = connection.prepareStatement("UPDATE claims SET \"mem_id\" = ?, \"date\" = ?, \"rationale\" = ?, \"status\" = ?, \"amount\" = ? WHERE \"id\" = ?");
+            ps.setString(1, c.mem_id);
+            ps.setDate(2, c.date);
+            ps.setString(3, c.rationale);
+            ps.setString(4, c.status);
+            ps.setDouble(5, c.amount);
+            ps.setInt(6, c.id);
+            ps.executeUpdate();
+            ps.close();
+            return true;
+        }catch(SQLException e){}
+        return false;
+    }
+    
+    public boolean updateMember(Member m)
+    {
+        try{
+            PreparedStatement ps = connection.prepareStatement("UPDATE members SET \"name\" = ?, \"address\" = ?, \"dob\" = ?, \"dor\" = ?, \"status\" = ?, \"balance\" = ? WHERE \"id\" = ?");
+            ps.setString(1, m.name);
+            ps.setString(2, m.address);
+            ps.setDate(3, m.dob);
+            ps.setDate(4, m.dor);
+            ps.setString(5, m.status);
+            ps.setDouble(6, m.balance);
+            ps.setString(7, m.id);
+            ps.executeUpdate();
+            ps.close();
+            return true;
+        }catch(SQLException e){}
+        return false;
+    }
+    
+    public boolean updatePayment(Payment p)
+    {
+        try{
+            PreparedStatement ps = connection.prepareStatement("UPDATE members SET \"mem_id\" = ?, \"type_of_payment\" = ?, \"amount\" = ?, \"date\" = ?, \"time\" = ? WHERE \"id\" = ?");
+            ps.setString(1, p.mem_id);
+            ps.setString(2, p.type_of_payment);
+            ps.setDouble(3, p.amount);
+            ps.setDate(4, p.date);
+            ps.setTime(5, p.time);
+            ps.setInt(6, p.id);
+            ps.executeUpdate();
+            ps.close();
+            return true;
+        }catch(SQLException e){}
+        return false;
+    }
+    
+    public boolean updateUser(User u)
+    {
+        try{
+            PreparedStatement ps = connection.prepareStatement("UPDATE users SET \"password\" = ?, \"status\" = ? WHERE \"id\" = ?");
+            ps.setString(1, u.password);
+            ps.setString(2, u.status);
+            ps.setString(3, u.id);
+            ps.executeUpdate();
+            ps.close();
+            return true;
+        }catch(SQLException e){}
         return false;
     }
 }
