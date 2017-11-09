@@ -81,8 +81,7 @@ public class DBBean {
             ps.executeUpdate();      
             ps.close();
             return true;
-        } catch (Exception e) {}
-        
+        } catch (Exception e) {System.out.println("Record already extists");}
         return false;
     }
     
@@ -101,7 +100,7 @@ public class DBBean {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (Exception e) {}
+        } catch (Exception e) {System.out.println("Record already extists");}
         return false;
     }
     
@@ -119,7 +118,7 @@ public class DBBean {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (Exception e) {}
+        } catch (Exception e) {System.out.println("Record already extists");}
         return false;
     }
     
@@ -134,7 +133,7 @@ public class DBBean {
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (Exception e) {}
+        } catch (Exception e) {System.out.println("Record already extists");}
         return false;
     }
 }

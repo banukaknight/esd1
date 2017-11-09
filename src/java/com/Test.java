@@ -16,12 +16,14 @@ public class Test extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        
         //Replace databse with database name
         //Replace username with database username
         //Replace password with database password
-        DBBean b = new DBBean("databse", "username", "password");
         //Requests everything from each table on the database and stores in an arraylist
-        //Example syntax below on how to cycle through 
+        DBBean b = new DBBean("databse", "username", "password");
+        
+        //Array lists to store records returned
         ArrayList<Claim> claims = b.getClaims();
         ArrayList<Payment> payments = b.getPayments();
         ArrayList<Member> members = b.getMembers();
@@ -34,6 +36,9 @@ public class Test extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Claims</h1>");
+            
+            //EXAMPLE CODE FOR EACH TABLE
+            
             for(Claim c : claims)
                 out.println("<p>" + c.toString() + "</p>");
             out.println("<br><h1>Users</h1>");
@@ -45,10 +50,14 @@ public class Test extends HttpServlet {
             out.println("<br><h1>Payments</h1>");
             for(Payment p : payments)
                 out.println("<p>" + p.toString() + "</p>");
-            //b.addUser(new User("id", "pw", "status"));
-            //b.addClaim(new Claim(34334, "id", new Date(1,1,1), "rat", "stat", 324.2 ));
-            //b.addMember(new Member("id", "name", "add", new Date(1,2,3), new Date(3,2,1), "stat", 123.1));
-            //b.addPayment(new Payment(3453, "id", "payment", 234.22, new Date(12,3,4), new Time(1,2,3)));
+
+            //EXAMPLE CODE TO ADD NEW RECORDS
+
+            b.addUser(new User("id", "pw", "status"));
+            b.addClaim(new Claim(34334, "id", new Date(1,1,1), "rat", "stat", 324.2 ));
+            b.addMember(new Member("id", "name", "add", new Date(1,2,3), new Date(3,2,1), "stat", 123.1));
+            b.addPayment(new Payment(3453, "id", "payment", 234.22, new Date(12,3,4), new Time(1,2,3)));
+            
             out.println("</body>");
             out.println("</html>");
         }
