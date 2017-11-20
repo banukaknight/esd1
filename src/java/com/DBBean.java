@@ -81,7 +81,7 @@ public class DBBean
             ps.executeUpdate();      
             ps.close();
             return true;
-        } catch (Exception e) {System.out.println("User record already extists");}
+        } catch (Exception e) {System.out.println("Claim record already exists");}
         return false;
     }
     
@@ -100,7 +100,7 @@ public class DBBean
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (Exception e) {System.out.println("User record already extists");}
+        } catch (Exception e) {System.out.println("Member record already exists");}
         return false;
     }
     
@@ -118,7 +118,7 @@ public class DBBean
             ps.executeUpdate();
             ps.close();
             return true;
-        } catch (Exception e) {System.out.println("User record already extists");}
+        } catch (Exception e) {System.out.println("Payment record already exists");}
         return false;
     }
     
