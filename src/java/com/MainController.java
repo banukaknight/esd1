@@ -38,7 +38,6 @@ public class MainController extends HttpServlet {
         HttpSession session = request.getSession();
         
         if(session.getAttribute("bean") == null){
-            DBBean bean = new DBBean("esddb", "server", "123");
             DBBean bean = new DBBean("databse", "username", "password");
             session.setAttribute("bean", bean);
         }
