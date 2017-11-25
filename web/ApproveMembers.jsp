@@ -13,13 +13,25 @@
     </head>
     <body>
         <div id="checkboxes">
-            <label>Unapproved Memberships</label>
-            <ul>
-              <li><input type="checkbox"> checkbox 1</li>
-              <li><input type="checkbox"> checkbox 2</li>
-              <li><input type="checkbox"> checkbox 3</li>
-              <li><input type="checkbox"> checkbox 4</li>
-            </ul>
+            <%@ page import="java.util.ArrayList"%>
+            <%@ page import="com.Member"%>
+            <%
+                ArrayList<Member> members = (ArrayList<Member>)request.getAttribute("members");
+            %>
+            <TABLE BORDER=1 CELLPADDING=0 CELLSPACING=0>
+                <%  for(Member m : members){    %>
+                    <TR>
+                        <td>
+                            <input type="checkbox" value="unchecked" />
+                        </td>
+                        <td><%out.print(m.id);%></td>
+                        <td><%out.print(m.name);%></td>
+                        <td><%out.print(m.address);%></td>
+                        <td><%out.print(m.dob);%></td>
+                        <td><%out.print(m.dor);%></td>
+                    </TR>
+                <%}%>
+            </TABLE>
           </div>
     </body>
 </html>
