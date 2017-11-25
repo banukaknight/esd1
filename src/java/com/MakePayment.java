@@ -6,7 +6,9 @@
 package com;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -18,9 +20,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author leoed
+ * @author Jake
  */
-public class MainController extends HttpServlet {
+public class MakePayment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,33 +32,26 @@ public class MainController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession();
-        
-        if(session.getAttribute("bean") == null){
-            DBBean bean = new DBBean("esddb", "server", "123");
-            DBBean bean = new DBBean("databse", "username", "password");
-            session.setAttribute("bean", bean);
+        User user = (User)session.getAttribute("user");
+        DBBean b = (DBBean)session.getAttribute("bean");
+        ArrayList<Member> members = b.getMembers();
+        for(int i = 0; i < members.size(); i++)
+        {
+            if(members.get(i).id.equals(user.id))
+            {
+                session.setAttribute("member", members.get(i));
+                request.setAttribute("balance", members.get(i).balance);
+            }
         }
-        
-        User sessionUser = (User)session.getAttribute("user");
-        
-        RequestDispatcher view;
-        
-        if(sessionUser == null){
-            view = request.getRequestDispatcher("login.jsp");
-        }
-        else if(sessionUser.status.equalsIgnoreCase("APPROVED  ")){
-            view = request.getRequestDispatcher("userdashdummy.html");
-        }
-        else{
-            view = request.getRequestDispatcher("admindashdummy.html");
-        }
-        
+        RequestDispatcher view = request.getRequestDispatcher("payment.jsp");
         view.forward(request, response);
     }
 
@@ -75,7 +70,7 @@ public class MainController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("ERROR INGET");
         }
     }
 
@@ -93,7 +88,7 @@ public class MainController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("ERROR IN POST");
         }
     }
 

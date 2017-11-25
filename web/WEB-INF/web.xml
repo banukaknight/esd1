@@ -9,8 +9,13 @@
         <servlet-class>com.MainController</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>ApproveMemberships</servlet-name>
         <servlet-class>com.ApproveMemberships</servlet-class>
+=======
+        <servlet-name>MakePayment</servlet-name>
+        <servlet-class>com.MakePayment</servlet-class>
+>>>>>>> 8fc9d2ee9f9cc9b73a087b88e9c626558fdd19d5
     </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
@@ -21,8 +26,13 @@
         <url-pattern>/MainController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>ApproveMemberships</servlet-name>
         <url-pattern>/ApproveMemberships</url-pattern>
+=======
+        <servlet-name>MakePayment</servlet-name>
+        <url-pattern>/MakePayment</url-pattern>
+>>>>>>> 8fc9d2ee9f9cc9b73a087b88e9c626558fdd19d5
     </servlet-mapping>
     <session-config>
         <session-timeout>
