@@ -7,6 +7,7 @@ package com;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -71,7 +72,33 @@ public class ApproveMemberships extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String[] checkedMembers = request.getParameterValues("checkedMembers");
+        if(checkedMembers != null){
+            ArrayList<Member> membersToApprove = new ArrayList<>();
+            HttpSession session = request.getSession();
+            ArrayList<Member> unapprovedMembers = new ArrayList<>();
+            DBBean bean = (DBBean)session.getAttribute("bean");
+            try {
+                unapprovedMembers = Members.getAppliedMembers(bean);
+            } catch (SQLException ex) {
+                Logger.getLogger(ApproveMemberships.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            for(String id : checkedMembers){
+                for(Member m : unapprovedMembers)
+                    if(m.id.equals(id))
+                        membersToApprove.add(m);
+            }
+
+            for(Member m : membersToApprove)
+                Members.approveMember(m, bean);
+        }
+
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ApproveMemberships.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

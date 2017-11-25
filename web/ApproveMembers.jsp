@@ -18,20 +18,31 @@
             <%
                 ArrayList<Member> members = (ArrayList<Member>)request.getAttribute("members");
             %>
-            <TABLE BORDER=1 CELLPADDING=0 CELLSPACING=0>
-                <%  for(Member m : members){    %>
-                    <TR>
-                        <td>
-                            <input type="checkbox" value="unchecked" />
-                        </td>
-                        <td><%out.print(m.id);%></td>
-                        <td><%out.print(m.name);%></td>
-                        <td><%out.print(m.address);%></td>
-                        <td><%out.print(m.dob);%></td>
-                        <td><%out.print(m.dor);%></td>
-                    </TR>
-                <%}%>
-            </TABLE>
+            <%  if(members.size() > 0) {    %>
+                <form action="ApproveMemberships" method="post"> 
+                    <TABLE id="memberTable" BORDER=1 CELLPADDING=2 CELLSPACING=0>
+                        <%  for(Member m : members){    %>
+                            <%  int x = 0;  %>
+                            <TR>
+                                <td>
+                                    <input type="checkbox" name="checkedMembers" value="<%out.print(m.id);%>" />
+                                </td>
+                                <td><%out.print(m.id);%></td>
+                                <td><%out.print(m.name);%></td>
+                                <td><%out.print(m.address);%></td>
+                                <td><%out.print(m.dob);%></td>
+                                <td><%out.print(m.dor);%></td>
+                            </TR>
+                        <%}%>
+                    </TABLE>
+                    <input type="submit" value="Approve">
+                </form>
+            <%
+                }
+                else{
+            %>
+            <p>There are currently no un-approved members</p>
+            <%}%>
           </div>
     </body>
 </html>

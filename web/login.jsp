@@ -1,4 +1,4 @@
-<%-- 
+ <%-- 
     Document   : login
     Created on : 12-Nov-2017, 15:48:18
     Author     : leoed
@@ -16,7 +16,7 @@
         <form action="LoginServlet" method="post">  
         Name:<input type="text" name="name"><br>  
         Password:<input type="password" name="password"><br>  
-        <input type="submit" value="login">  
+        <input type="submit" value="Login">  
     </form>
     <p>
     
