@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/Test.java</file>
-            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/DBBean.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/DBBean.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/login.jsp</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/Login.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/LoginServlet.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/MainController.java</file>
         </group>
     </open-files>
 </project-private>
