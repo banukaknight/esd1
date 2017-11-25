@@ -37,7 +37,13 @@ public class ApproveMemberships extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        request.setAttribute("members", Members.getAppliedMembers((DBBean)session.getAttribute("bean")));
+        DBBean bean = (DBBean)session.getAttribute("bean");
+        ArrayList<Member> unapprovedMembers = Members.getAppliedMembers(bean);
+        boolean[] feesPaid = new boolean[unapprovedMembers.size()];
+        for(int x = 0; x < unapprovedMembers.size(); x++)
+            feesPaid[x] = Fees.initialFeePaid(unapprovedMembers.get(x), bean);
+        request.setAttribute("members", unapprovedMembers);
+        request.setAttribute("fees", feesPaid);
         RequestDispatcher view = request.getRequestDispatcher("ApproveMembers.jsp");
         view.forward(request, response);
     }

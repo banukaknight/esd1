@@ -17,12 +17,21 @@
             <%@ page import="com.Member"%>
             <%
                 ArrayList<Member> members = (ArrayList<Member>)request.getAttribute("members");
+                boolean[] fees = (boolean[])request.getAttribute("fees");
             %>
             <%  if(members.size() > 0) {    %>
                 <form action="ApproveMemberships" method="post"> 
                     <TABLE id="memberTable" BORDER=1 CELLPADDING=2 CELLSPACING=0>
-                        <%  for(Member m : members){    %>
-                            <%  int x = 0;  %>
+                        <td></td>
+                        <td><b>ID</b></td>
+                        <td><b>Name</b></td>
+                        <td><b>Address</b></td>
+                        <td><b>Date of Birth</b></td>
+                        <td><b>Date of Registration</b></td>
+                        <td><b>Balance</b></td>
+                        <td><b>Fee Paid</b></td>
+                        <%  for(int x = 0; x < members.size(); x++){
+                            Member m = members.get(x);  %>
                             <TR>
                                 <td>
                                     <input type="checkbox" name="checkedMembers" value="<%out.print(m.id);%>" />
@@ -32,6 +41,8 @@
                                 <td><%out.print(m.address);%></td>
                                 <td><%out.print(m.dob);%></td>
                                 <td><%out.print(m.dor);%></td>
+                                <td><%out.print(m.balance);%></td>
+                                <td><%out.print(fees[x] ? "Yes" : "No");%></td>
                             </TR>
                         <%}%>
                     </TABLE>
