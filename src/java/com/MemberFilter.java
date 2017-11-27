@@ -46,7 +46,7 @@ public class MemberFilter implements Filter {
         HttpSession session = req.getSession();
         User currentUser = (User) session.getAttribute("user");
         
-        if((currentUser == null) || (!currentUser.status.startsWith("ADMIN") && !currentUser.status.startsWith("APPLIED"))){
+        if((currentUser == null) || (!currentUser.status.startsWith("APPROVED") && !currentUser.status.startsWith("APPLIED"))){
             RequestDispatcher view = request.getRequestDispatcher("MainController");
             view.forward(request, response);
         }
