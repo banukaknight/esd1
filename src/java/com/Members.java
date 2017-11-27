@@ -25,6 +25,17 @@ public class Members {
         return appliedMembers;
     }
     
+    public static ArrayList<Member> getAppliedEligibleMembers(DBBean bean) throws SQLException{
+        ArrayList<Member> appliedMembers = getAppliedMembers(bean);
+        ArrayList<Member> eligibleMembers = new ArrayList<>();
+        
+        for(Member m : appliedMembers)
+            if(Fees.initialFeePaid(m, bean))
+                eligibleMembers.add(m);
+        
+        return eligibleMembers;
+    }
+    
     public static void approveMember(Member m, DBBean bean){
         m.status = "APPROVED";
         bean.updateMember(m);
