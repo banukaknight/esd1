@@ -55,7 +55,7 @@ public class PaymentServlet extends HttpServlet {
             b.addPayment(p);
             b.updateMember(m);
         }
-        RequestDispatcher view = request.getRequestDispatcher("userdashdummy.html"); 
+        RequestDispatcher view = request.getRequestDispatcher("/UserDashboard"); 
         view.forward(request, response);
     }
 
