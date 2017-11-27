@@ -45,10 +45,15 @@ public class PaymentServlet extends HttpServlet {
         DBBean b = (DBBean)session.getAttribute("bean");
         Payment p = new Payment(b.getPayments().size() + 1, u.id, "FEE", Double.parseDouble(request.getParameter("amount")), new Date(d.getTime()), new Time(d.getTime()));
         Member m = (Member)session.getAttribute("member");
-        m.balance -= Double.parseDouble(request.getParameter("amount"));
+        double amount = 0;
+        try{
+            amount = Double.parseDouble(request.getParameter("amount"));
+        }catch(Exception e) { System.out.println(e); }
+        if(amount > 0 && m.balance > 0 && m.balance - amount >=0) //make sure money can't be added through payment
+            m.balance -= amount;
         b.addPayment(p);
         b.updateMember(m);
-        RequestDispatcher view = request.getRequestDispatcher("Test");
+        RequestDispatcher view = request.getRequestDispatcher("userdashdummy.html"); 
         view.forward(request, response);
     }
 

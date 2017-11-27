@@ -6,20 +6,18 @@
 package com;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author leoed
+ * @author Jake
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+public class RegisterMember extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,22 +31,8 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            String name=request.getParameter("name");  
-            String password=request.getParameter("password");
-            
-            HttpSession session = request.getSession();
-            
-            User loginAttempt = Login.attemptLogin(name, password, (DBBean)session.getAttribute("bean"));
-            
-            if(loginAttempt != null){
-                session.setAttribute("user", loginAttempt);
-                response.sendRedirect("http://localhost:8080/ESDAssignment/MainController");
-            }
-            else{
-                request.setAttribute("message", "Username or password incorrect. Please try again.");
-                RequestDispatcher view = request.getRequestDispatcher("login.jsp");
-                view.forward(request, response);
-            }
+        RequestDispatcher view = request.getRequestDispatcher("register.jsp"); 
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

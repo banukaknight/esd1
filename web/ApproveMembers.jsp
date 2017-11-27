@@ -12,6 +12,9 @@
         <title>Approve Memberships</title>
     </head>
     <body>
+        <a href="http://localhost:8080/ESDAssignment/MainController">Dash</a>
+        <a href="http://localhost:8080/ESDAssignment/Logout">Logout</a>
+        <h1>Approve memberships</h1>
         <div id="checkboxes">
             <%@ page import="java.util.ArrayList"%>
             <%@ page import="com.Member"%>

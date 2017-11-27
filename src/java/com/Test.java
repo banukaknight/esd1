@@ -36,8 +36,6 @@ public class Test extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<a href=\"http://localhost:8080/ESDAssignment/MakePayment\">Make Payment</a>");
-            out.println("<h1>Claims</h1>");
-            
             
             //EXAMPLE CODE TO ADD NEW RECORDS
 

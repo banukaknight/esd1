@@ -6,13 +6,14 @@
 package com;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Jake
  */
-public class MakePayment extends HttpServlet {
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
+public class RegisterServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,39 +34,51 @@ public class MakePayment extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
         DBBean b = (DBBean)session.getAttribute("bean");
-        if(user == null)
-        {
-            RequestDispatcher view = request.getRequestDispatcher("login.jsp");
-            view.forward(request, response);
-        }
         if(b == null)
         {
             b = new DBBean("esddb", "server", "123");
             session.setAttribute("bean", b);
         }
-        ArrayList<Member> members = b.getMembers();
-        for(int i = 0; i < members.size(); i++)
+        String name = request.getParameter("name");
+        java.util.Date d = new java.util.Date();
+        String[] nameSplit = name.split(" ");
+        String id = nameSplit[0].charAt(0) + "-" + nameSplit[nameSplit.length - 1];
+        ArrayList<User> userList = b.getUsers();
+        Member m;
+        User u;
+        int tries = 1;
+        int idl = id.length();
+        while(!userExists(id,userList).equals(""))    
         {
-            if(members.get(i).id.equals(user.id))
-            {
-                session.setAttribute("member", members.get(i));
-                request.setAttribute("balance", members.get(i).balance);
-            }
+            id = id.substring(0,idl) + tries;
+            tries++;
         }
-        RequestDispatcher view = request.getRequestDispatcher("payment.jsp");
+        Date date = Date.valueOf(request.getParameter("dob"));
+        String pw = date.toString();
+        String password = "" + pw.charAt(8) + pw.charAt(9) + pw.charAt(5) + pw.charAt(6) + pw.charAt(2) + pw.charAt(3);;
+        m = new Member(id,name,request.getParameter("address"),date,new Date(d.getTime()),"APPLIED",0);
+        u = new User(id,password,"APPROVED");
+        b.addUser(u);
+        b.addMember(m);
+        request.setAttribute("message", "Your new username is: " + id);
+        RequestDispatcher view = request.getRequestDispatcher("login.jsp");
         view.forward(request, response);
     }
 
+    private String userExists(String id, ArrayList<User> userlist)
+    {
+        for(User u : userlist)
+            if(u.id.equals(id))
+                return u.id;
+        return "";
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -80,7 +94,7 @@ public class MakePayment extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            System.out.println("ERROR INGET");
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -98,7 +112,7 @@ public class MakePayment extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            System.out.println("ERROR IN POST");
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

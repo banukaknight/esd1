@@ -3,12 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/DBBean.java</file>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/login.jsp</file>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/Login.java</file>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/LoginServlet.java</file>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/MainController.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/web/register.jsp</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/Test.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/Payment.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/RegisterServlet.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/MakePayment.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/MainController.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/web/payment.jsp</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/ApproveMemberships.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/RegisterMember.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/PaymentServlet.java</file>
         </group>
     </open-files>
 </project-private>

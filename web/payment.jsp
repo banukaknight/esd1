@@ -14,11 +14,13 @@
         <title>Make Payment</title>
     </head>
     <body>
+        <a href="http://localhost:8080/ESDAssignment/MainController">Dash</a>
+        <a href="http://localhost:8080/ESDAssignment/Logout">Logout</a>
         <h1>Make a new payment</h1>
         <% 
            String err = "";
-           double balance = 69.00; 
-           try{balance = Double.parseDouble(request.getAttribute("balance").toString());}catch(Exception e){err = "Member page doesn't exist.";}%>
+           double balance = 0.00; 
+           try{balance = Double.parseDouble(request.getAttribute("balance").toString());}catch(Exception e){err = "Member doesn't exist, please log in and try again.";}%>
         Your balance is: <%= balance %>
         <br><%= err %>
         <form action="PaymentServlet" method="post">  

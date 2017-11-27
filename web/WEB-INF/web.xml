@@ -16,6 +16,10 @@
         <servlet-name>MakePayment</servlet-name>
         <servlet-class>com.MakePayment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterMember</servlet-name>
+        <servlet-class>com.RegisterMember</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -32,9 +36,13 @@
         <servlet-name>MakePayment</servlet-name>
         <url-pattern>/MakePayment</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterMember</servlet-name>
+        <url-pattern>/RegisterMember</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            20
         </session-timeout>
     </session-config>
     <welcome-file-list>

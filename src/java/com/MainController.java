@@ -50,7 +50,7 @@ public class MainController extends HttpServlet {
         if(sessionUser == null){
             view = request.getRequestDispatcher("login.jsp");
         }
-        else if(sessionUser.status.equalsIgnoreCase("APPROVED  ")){
+        else if(sessionUser.status.startsWith("APPROVED")){
             view = request.getRequestDispatcher("userdashdummy.html");
         }
         else{
