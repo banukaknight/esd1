@@ -45,19 +45,22 @@ public class MainController extends HttpServlet {
         
         User sessionUser = (User)session.getAttribute("user");
         
-        RequestDispatcher view;
+        //RequestDispatcher view;
         
         if(sessionUser == null){
-            view = request.getRequestDispatcher("login.jsp");
+            response.sendRedirect("login.jsp");
+            //view = request.getRequestDispatcher("login.jsp");
         }
         else if(sessionUser.status.equalsIgnoreCase("APPROVED  ")){
-            view = request.getRequestDispatcher("userdashdummy.html");
+            response.sendRedirect("userdashdummy.html");
+            //view = request.getRequestDispatcher("userdashdummy.html");
         }
         else{
-            view = request.getRequestDispatcher("admindashdummy.html");
+            response.sendRedirect("admindashdummy.html");
+            //view = request.getRequestDispatcher("admindashdummy.html");
         }
         
-        view.forward(request, response);
+        //view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
