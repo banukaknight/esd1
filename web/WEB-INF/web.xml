@@ -17,17 +17,16 @@
         <servlet-class>com.MakePayment</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>ViewMembers</servlet-name>
         <servlet-class>com.ViewMembers</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewClaims</servlet-name>
         <servlet-class>com.ViewClaims</servlet-class>
-=======
+    </servlet>
+    <servlet>
         <servlet-name>RegisterMember</servlet-name>
         <servlet-class>com.RegisterMember</servlet-class>
->>>>>>> 791c0ae9807a09578ed12f50e53acca2c188f0d7
     </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
@@ -46,17 +45,16 @@
         <url-pattern>/MakePayment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>ViewMembers</servlet-name>
         <url-pattern>/ViewMembers</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewClaims</servlet-name>
         <url-pattern>/ViewClaims</url-pattern>
-=======
+    </servlet-mapping>
+        <servlet-mapping>
         <servlet-name>RegisterMember</servlet-name>
         <url-pattern>/RegisterMember</url-pattern>
->>>>>>> 791c0ae9807a09578ed12f50e53acca2c188f0d7
     </servlet-mapping>
     <session-config>
         <session-timeout>
