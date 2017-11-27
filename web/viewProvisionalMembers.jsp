@@ -12,6 +12,8 @@
         <title>View Provisional Members</title>
     </head>
     <body>
+        <a href="./MainController">Dash</a>
+        <a href="./Logout">Logout</a>
         <div>
             <%@ page import="java.util.ArrayList"%>
             <%@ page import="com.Member"%>
