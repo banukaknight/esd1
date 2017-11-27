@@ -38,7 +38,6 @@
                             </TR>
                         <%}%>
                     </TABLE>
-                </form>
             <%
                 }
                 else{

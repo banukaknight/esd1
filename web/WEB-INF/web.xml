@@ -36,6 +36,10 @@
         <servlet-name>ViewProvisionalMembers</servlet-name>
         <servlet-class>com.ViewProvisionalMembers</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewUserClaimsAndPayments</servlet-name>
+        <servlet-class>com.ViewUserClaimsAndPayments</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>ViewProvisionalMembers</servlet-name>
         <url-pattern>/ViewProvisionalMembers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewUserClaimsAndPayments</servlet-name>
+        <url-pattern>/ViewClaimsAndPayments</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
