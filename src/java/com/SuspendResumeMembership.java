@@ -7,9 +7,8 @@ package com;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Time;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -24,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Jake
  */
-@WebServlet(name = "PaymentServlet", urlPatterns = {"/PaymentServlet"})
-public class PaymentServlet extends HttpServlet {
+@WebServlet(name = "SuspendResumeMembership", urlPatterns = {"/SuspendResumeMembership"})
+public class SuspendResumeMembership extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,23 +38,15 @@ public class PaymentServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        java.util.Date d = new java.util.Date();
         HttpSession session = request.getSession();
-        User u = (User)session.getAttribute("user");
         DBBean b = (DBBean)session.getAttribute("bean");
-        Payment p = new Payment(b.getPayments().size() + 1, u.id, "FEE", Double.parseDouble(request.getParameter("amount")), new Date(d.getTime()), new Time(d.getTime()));
-        Member m = (Member)session.getAttribute("member");
-        double amount = 0;
-        try{
-            amount = Double.parseDouble(request.getParameter("amount"));
-        }catch(Exception e) { System.out.println(e); }
-        if(amount > 0 && m.balance > 0 && m.balance - amount >=0) //make sure money can't be added through payment
+        if(b == null)
         {
-            m.balance -= amount;
-            b.addPayment(p);
-            b.updateMember(m);
+            b = new DBBean("esddb", "server", "123");
+            session.setAttribute("bean", b);
         }
-        RequestDispatcher view = request.getRequestDispatcher("userdashdummy.html"); 
+        request.setAttribute("members", b.getMembers());
+        RequestDispatcher view = request.getRequestDispatcher("SuspendResumeMembership.jsp");
         view.forward(request, response);
     }
 
@@ -74,7 +65,7 @@ public class PaymentServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(PaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SuspendResumeMembership.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,10 +81,30 @@ public class PaymentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(PaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            String[] toSuspend = request.getParameterValues("suspended");
+            HttpSession session = request.getSession();
+            DBBean b = (DBBean)session.getAttribute("bean");
+            if(b == null)
+            {
+                    b = new DBBean("esddb", "server", "123");
+                    session.setAttribute("bean", b);
+            }
+            if(toSuspend != null)
+            {
+                ArrayList<Member> members = b.getMembers();
+                for(Member m : members)
+                    m.status = "APPROVED";
+                for(Member m : members)
+                {
+                    for(String s : toSuspend)
+                        if(m.id.equals(s))
+                        m.status = "SUSPENDED";
+                    b.updateMember(m);
+                }
+                processRequest(request, response);
+            }
+        } catch (SQLException ex) {}  
+        response.sendRedirect("./MainController");
     }
 
     /**

@@ -14,8 +14,8 @@
         <title>Make Payment</title>
     </head>
     <body>
-        <a href="http://localhost:8080/ESDAssignment/MainController">Dash</a>
-        <a href="http://localhost:8080/ESDAssignment/Logout">Logout</a>
+        <a href="./MainController">Dash</a>
+        <a href="./Logout">Logout</a>
         <h1>Make a new payment</h1>
         <% 
            String err = "";

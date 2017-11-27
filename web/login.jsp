@@ -25,6 +25,6 @@
         if(s != null)
             out.print(s);
     %>
-    <a href="http://localhost:8080/ESDAssignment/RegisterMember"><br>Register</a>
+    <a href="./RegisterMember"><br>Register</a>
     </body>
 </html>

@@ -61,8 +61,8 @@ public class RegisterServlet extends HttpServlet {
         }
         Date date = Date.valueOf(request.getParameter("dob"));
         String pw = date.toString();
-        String password = "" + pw.charAt(8) + pw.charAt(9) + pw.charAt(5) + pw.charAt(6) + pw.charAt(2) + pw.charAt(3);;
-        m = new Member(id,name,request.getParameter("address"),date,new Date(d.getTime()),"APPLIED",0);
+        String password = "" + pw.charAt(8) + pw.charAt(9) + pw.charAt(5) + pw.charAt(6) + pw.charAt(2) + pw.charAt(3);
+        m = new Member(id,name,request.getParameter("address"),date,new Date(d.getTime()),"APPLIED",10);
         u = new User(id,password,"APPROVED");
         b.addUser(u);
         b.addMember(m);

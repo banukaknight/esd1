@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
             
             if(loginAttempt != null){
                 session.setAttribute("user", loginAttempt);
-                response.sendRedirect("http://localhost:8080/ESDAssignment/MainController");
+                response.sendRedirect("./MainController");
             }
             else{
                 request.setAttribute("message", "Username or password incorrect. Please try again.");
