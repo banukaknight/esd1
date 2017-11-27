@@ -49,8 +49,7 @@ public class MainController extends HttpServlet {
             response.sendRedirect("login.jsp");
         }
         else if(sessionUser.status.startsWith("APPROVED")){
-            RequestDispatcher view = request.getRequestDispatcher("UserDashboard");
-            view.forward(request, response);
+            response.sendRedirect("UserDashboard");
         }
         else{
             response.sendRedirect("admindashdummy.html");

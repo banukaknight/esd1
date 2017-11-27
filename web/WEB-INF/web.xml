@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>com.AdminFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>MemberFilter</filter-name>
+        <filter-class>com.MemberFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>MemberFilter</filter-name>
+        <servlet-name>ViewUserClaimsAndPayments</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MemberFilter</filter-name>
+        <servlet-name>MakePayment</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MemberFilter</filter-name>
+        <servlet-name>UserDashboard</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admindashdummy.html</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <servlet-name>ViewOutstandingBalances</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <servlet-name>ViewClaims</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <servlet-name>ViewMembers</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <servlet-name>ApproveMemberships</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>Test</servlet-name>
         <servlet-class>com.Test</servlet-class>
