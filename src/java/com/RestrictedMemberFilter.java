@@ -15,11 +15,11 @@ import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -105,6 +105,7 @@ public class RestrictedMemberFilter implements Filter {
             throws IOException, ServletException {
         
         HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
         User currentUser = (User) session.getAttribute("user");
         DBBean bean = (DBBean) session.getAttribute("bean");
@@ -116,8 +117,7 @@ public class RestrictedMemberFilter implements Filter {
         }
         
         if((currentMember != null) && (currentMember.status.startsWith("SUSPENDED") || currentMember.status.startsWith("APPLIED"))){
-            RequestDispatcher view = request.getRequestDispatcher("MainController");
-            view.forward(request, response);
+            res.sendRedirect("NotPermitted.html");
             return;
         }
         
