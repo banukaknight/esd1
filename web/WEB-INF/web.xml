@@ -28,6 +28,10 @@
         <servlet-name>RegisterMember</servlet-name>
         <servlet-class>com.RegisterMember</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewOutstandingBalances</servlet-name>
+        <servlet-class>com.ViewOutstandingBalances</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -52,9 +56,13 @@
         <servlet-name>ViewClaims</servlet-name>
         <url-pattern>/ViewClaims</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>RegisterMember</servlet-name>
         <url-pattern>/RegisterMember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewOutstandingBalances</servlet-name>
+        <url-pattern>/ViewOutstandingBalances</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

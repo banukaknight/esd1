@@ -29,4 +29,16 @@ public class Members {
         m.status = "APPROVED";
         bean.updateMember(m);
     }
+    
+    public static ArrayList<Member> getMembersWithOutstandingBalances(DBBean bean) throws SQLException{
+        ArrayList<Member> outstandingMembers = new ArrayList<>();
+        ArrayList<Member> allMembers = bean.getMembers();
+        
+        for(Member m : allMembers){
+            if(m.balance != 0)
+                outstandingMembers.add(m);
+        }
+        
+        return outstandingMembers;
+    }
 }
