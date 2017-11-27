@@ -16,6 +16,14 @@
         <servlet-name>MakePayment</servlet-name>
         <servlet-class>com.MakePayment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewMembers</servlet-name>
+        <servlet-class>com.ViewMembers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewClaims</servlet-name>
+        <servlet-class>com.ViewClaims</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>MakePayment</servlet-name>
         <url-pattern>/MakePayment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMembers</servlet-name>
+        <url-pattern>/ViewMembers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewClaims</servlet-name>
+        <url-pattern>/ViewClaims</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
