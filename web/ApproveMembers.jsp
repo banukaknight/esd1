@@ -20,7 +20,6 @@
             <%@ page import="com.Member"%>
             <%
                 ArrayList<Member> members = (ArrayList<Member>)request.getAttribute("members");
-                boolean[] fees = (boolean[])request.getAttribute("fees");
             %>
             <%  if(members.size() > 0) {    %>
                 <form action="ApproveMemberships" method="post"> 
@@ -32,7 +31,6 @@
                         <td><b>Date of Birth</b></td>
                         <td><b>Date of Registration</b></td>
                         <td><b>Balance</b></td>
-                        <td><b>Fee Paid</b></td>
                         <%  for(int x = 0; x < members.size(); x++){
                             Member m = members.get(x);  %>
                             <TR>
@@ -45,7 +43,6 @@
                                 <td><%out.print(m.dob);%></td>
                                 <td><%out.print(m.dor);%></td>
                                 <td><%out.print(m.balance);%></td>
-                                <td><%out.print(fees[x] ? "Yes" : "No");%></td>
                             </TR>
                         <%}%>
                     </TABLE>
@@ -55,7 +52,7 @@
                 }
                 else{
             %>
-            <p>There are currently no un-approved members</p>
+            <p>There are currently no members eligible for approval</p>
             <%}%>
           </div>
     </body>

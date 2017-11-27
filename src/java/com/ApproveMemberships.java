@@ -39,11 +39,11 @@ public class ApproveMemberships extends HttpServlet {
         HttpSession session = request.getSession();
         DBBean bean = (DBBean)session.getAttribute("bean");
         ArrayList<Member> unapprovedMembers = Members.getAppliedMembers(bean);
-        boolean[] feesPaid = new boolean[unapprovedMembers.size()];
-        for(int x = 0; x < unapprovedMembers.size(); x++)
-            feesPaid[x] = Fees.initialFeePaid(unapprovedMembers.get(x), bean);
-        request.setAttribute("members", unapprovedMembers);
-        request.setAttribute("fees", feesPaid);
+        ArrayList<Member> unapprovedPaidMembers = new ArrayList<>();
+        for(Member m : unapprovedMembers)
+            if(Fees.initialFeePaid(m, bean))
+                unapprovedPaidMembers.add(m);
+        request.setAttribute("members", unapprovedPaidMembers);
         RequestDispatcher view = request.getRequestDispatcher("ApproveMembers.jsp");
         view.forward(request, response);
     }
@@ -92,8 +92,12 @@ public class ApproveMemberships extends HttpServlet {
 
             for(String id : checkedMembers){
                 for(Member m : unapprovedMembers)
-                    if(m.id.equals(id))
-                        membersToApprove.add(m);
+                    try {
+                        if(m.id.equals(id) && Fees.initialFeePaid(m, bean))
+                            membersToApprove.add(m);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ApproveMemberships.class.getName()).log(Level.SEVERE, null, ex);
+                    }
             }
 
             for(Member m : membersToApprove)
