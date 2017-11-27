@@ -8,6 +8,10 @@
         <filter-name>MemberFilter</filter-name>
         <filter-class>com.MemberFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>NotSignedInFilter</filter-name>
+        <filter-class>com.NotSignedInFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>MemberFilter</filter-name>
         <servlet-name>ViewUserClaimsAndPayments</servlet-name>
@@ -33,8 +37,16 @@
         <servlet-name>ViewClaims</servlet-name>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>NotSignedInFilter</filter-name>
+        <servlet-name>RegisterMember</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>NotSignedInFilter</filter-name>
+        <servlet-name>LoginServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>AdminFilter</filter-name>
-        <servlet-name>ViewMembers</servlet-name>
+        <servlet-name>ApproveMemberships</servlet-name>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
@@ -84,6 +96,10 @@
         <servlet-name>UserDashboard</servlet-name>
         <servlet-class>com.UserDashboard</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -127,6 +143,10 @@
     <servlet-mapping>
         <servlet-name>UserDashboard</servlet-name>
         <url-pattern>/UserDashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

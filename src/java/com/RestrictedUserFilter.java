@@ -16,15 +16,16 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author leoed
  */
-public class MemberFilter implements Filter {
+@WebFilter(filterName = "RestrictedUserFilter", servletNames = {"MakePayment"})
+public class RestrictedUserFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -33,20 +34,20 @@ public class MemberFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public MemberFilter() {
+    public RestrictedUserFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("MemberFilter:DoBeforeProcessing");
+            log("RestrictedUserFilter:DoBeforeProcessing");
         }
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
         User currentUser = (User) session.getAttribute("user");
         
-        if((currentUser == null) || (!currentUser.status.startsWith("APPROVED") && !currentUser.status.startsWith("APPLIED")&& !currentUser.status.startsWith("SUSPENDED"))){
+        if(currentUser.status.startsWith("SUSPENDED") || currentUser.status.startsWith("APPLIED")){
             RequestDispatcher view = request.getRequestDispatcher("MainController");
             view.forward(request, response);
         }
@@ -55,7 +56,7 @@ public class MemberFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("MemberFilter:DoAfterProcessing");
+            log("RestrictedUserFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -91,7 +92,7 @@ public class MemberFilter implements Filter {
             throws IOException, ServletException {
         
         if (debug) {
-            log("MemberFilter:doFilter()");
+            log("RestrictedUserFilter:doFilter()");
         }
         
         doBeforeProcessing(request, response);
@@ -151,7 +152,7 @@ public class MemberFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("MemberFilter:Initializing filter");
+                log("RestrictedUserFilter:Initializing filter");
             }
         }
     }
@@ -162,9 +163,9 @@ public class MemberFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("MemberFilter()");
+            return ("RestrictedUserFilter()");
         }
-        StringBuffer sb = new StringBuffer("MemberFilter(");
+        StringBuffer sb = new StringBuffer("RestrictedUserFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());

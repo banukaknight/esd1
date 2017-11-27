@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <form action="LoginServlet" method="post">  
+        <form action="Login" method="post">  
         Name:<input type="text" name="name"><br>  
         Password:<input type="password" name="password"><br>  
         <input type="submit" value="Login">  

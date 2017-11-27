@@ -46,7 +46,7 @@ public class MainController extends HttpServlet {
         User sessionUser = (User)session.getAttribute("user");
         
         if(sessionUser == null){
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("Login");
         }
         else if(sessionUser.status.startsWith("APPROVED")){
             response.sendRedirect("UserDashboard");
