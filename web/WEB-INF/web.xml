@@ -12,6 +12,18 @@
         <filter-name>NotSignedInFilter</filter-name>
         <filter-class>com.NotSignedInFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>RestrictedMemberFilter</filter-name>
+        <filter-class>com.RestrictedMemberFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>NotSignedInFilter</filter-name>
+        <servlet-name>RegisterMember</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>NotSignedInFilter</filter-name>
+        <servlet-name>LoginServlet</servlet-name>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>MemberFilter</filter-name>
         <servlet-name>ViewUserClaimsAndPayments</servlet-name>
@@ -37,20 +49,18 @@
         <servlet-name>ViewClaims</servlet-name>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>NotSignedInFilter</filter-name>
-        <servlet-name>RegisterMember</servlet-name>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>NotSignedInFilter</filter-name>
-        <servlet-name>LoginServlet</servlet-name>
-    </filter-mapping>
-    <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <servlet-name>ApproveMemberships</servlet-name>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <servlet-name>ApproveMemberships</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RestrictedMemberFilter</filter-name>
+        <servlet-name>MakePayment</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <servlet>
         <servlet-name>Test</servlet-name>

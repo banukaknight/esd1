@@ -41,16 +41,6 @@ public class AdminFilter implements Filter {
         if (debug) {
             log("AdminFilter:DoBeforeProcessing");
         }
-        
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpSession session = req.getSession();
-        User currentUser = (User) session.getAttribute("user");
-        
-        if((currentUser == null) || !currentUser.status.startsWith("ADMIN")){
-            RequestDispatcher view = request.getRequestDispatcher("MainController");
-            view.forward(request, response);
-        }
-        
     }    
     
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
@@ -90,37 +80,18 @@ public class AdminFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
-        if (debug) {
-            log("AdminFilter:doFilter()");
-        }
-        
-        doBeforeProcessing(request, response);
-        
-        Throwable problem = null;
-        try {
-            chain.doFilter(request, response);
-        } catch (Throwable t) {
-            // If an exception is thrown somewhere down the filter chain,
-            // we still want to execute our after processing, and then
-            // rethrow the problem after that.
-            problem = t;
-            t.printStackTrace();
-        }
-        
-        doAfterProcessing(request, response);
 
-        // If there was a problem, we want to rethrow it if it is
-        // a known type, otherwise log it.
-        if (problem != null) {
-            if (problem instanceof ServletException) {
-                throw (ServletException) problem;
-            }
-            if (problem instanceof IOException) {
-                throw (IOException) problem;
-            }
-            sendProcessingError(problem, response);
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpSession session = req.getSession();
+        User currentUser = (User) session.getAttribute("user");
+        
+        if((currentUser == null) || !currentUser.status.startsWith("ADMIN")){
+            RequestDispatcher view = request.getRequestDispatcher("MainController");
+            view.forward(request, response);
+            return;
         }
+        
+        chain.doFilter(request, response);
     }
 
     /**

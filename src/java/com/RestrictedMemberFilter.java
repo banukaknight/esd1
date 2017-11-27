@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -16,7 +19,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,8 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author leoed
  */
-@WebFilter(filterName = "RestrictedUserFilter", servletNames = {"MakePayment"})
-public class RestrictedUserFilter implements Filter {
+public class RestrictedMemberFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -34,29 +35,41 @@ public class RestrictedUserFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public RestrictedUserFilter() {
+    public RestrictedMemberFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("RestrictedUserFilter:DoBeforeProcessing");
+            log("RestrictedMemberFilter:DoBeforeProcessing");
         }
 
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpSession session = req.getSession();
-        User currentUser = (User) session.getAttribute("user");
-        
-        if(currentUser.status.startsWith("SUSPENDED") || currentUser.status.startsWith("APPLIED")){
-            RequestDispatcher view = request.getRequestDispatcher("MainController");
-            view.forward(request, response);
-        }
+        // Write code here to process the request and/or response before
+        // the rest of the filter chain is invoked.
+        // For example, a logging filter might log items on the request object,
+        // such as the parameters.
+        /*
+	for (Enumeration en = request.getParameterNames(); en.hasMoreElements(); ) {
+	    String name = (String)en.nextElement();
+	    String values[] = request.getParameterValues(name);
+	    int n = values.length;
+	    StringBuffer buf = new StringBuffer();
+	    buf.append(name);
+	    buf.append("=");
+	    for(int i=0; i < n; i++) {
+	        buf.append(values[i]);
+	        if (i < n-1)
+	            buf.append(",");
+	    }
+	    log(buf.toString());
+	}
+         */
     }    
     
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("RestrictedUserFilter:DoAfterProcessing");
+            log("RestrictedMemberFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -91,36 +104,24 @@ public class RestrictedUserFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
         
-        if (debug) {
-            log("RestrictedUserFilter:doFilter()");
-        }
-        
-        doBeforeProcessing(request, response);
-        
-        Throwable problem = null;
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpSession session = req.getSession();
+        User currentUser = (User) session.getAttribute("user");
+        DBBean bean = (DBBean) session.getAttribute("bean");
+        Member currentMember = null;
         try {
-            chain.doFilter(request, response);
-        } catch (Throwable t) {
-            // If an exception is thrown somewhere down the filter chain,
-            // we still want to execute our after processing, and then
-            // rethrow the problem after that.
-            problem = t;
-            t.printStackTrace();
+            currentMember = Members.getMemberById(currentUser.id, bean);
+        } catch (SQLException ex) {
+            Logger.getLogger(RestrictedMemberFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        doAfterProcessing(request, response);
-
-        // If there was a problem, we want to rethrow it if it is
-        // a known type, otherwise log it.
-        if (problem != null) {
-            if (problem instanceof ServletException) {
-                throw (ServletException) problem;
-            }
-            if (problem instanceof IOException) {
-                throw (IOException) problem;
-            }
-            sendProcessingError(problem, response);
+        if((currentMember != null) && (currentMember.status.startsWith("SUSPENDED") || currentMember.status.startsWith("APPLIED"))){
+            RequestDispatcher view = request.getRequestDispatcher("MainController");
+            view.forward(request, response);
+            return;
         }
+        
+        chain.doFilter(request, response);
     }
 
     /**
@@ -152,7 +153,7 @@ public class RestrictedUserFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("RestrictedUserFilter:Initializing filter");
+                log("RestrictedMemberFilter:Initializing filter");
             }
         }
     }
@@ -163,9 +164,9 @@ public class RestrictedUserFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("RestrictedUserFilter()");
+            return ("RestrictedMemberFilter()");
         }
-        StringBuffer sb = new StringBuffer("RestrictedUserFilter(");
+        StringBuffer sb = new StringBuffer("RestrictedMemberFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());

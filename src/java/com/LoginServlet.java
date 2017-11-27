@@ -75,6 +75,7 @@ public class LoginServlet extends HttpServlet {
         if(loginAttempt != null){
             session.setAttribute("user", loginAttempt);
             response.sendRedirect("./MainController");
+            return;
         }
         else{
             request.setAttribute("message", "Username or password incorrect. Please try again.");
