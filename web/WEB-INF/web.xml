@@ -32,6 +32,10 @@
         <servlet-name>ViewOutstandingBalances</servlet-name>
         <servlet-class>com.ViewOutstandingBalances</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewProvisionalMembers</servlet-name>
+        <servlet-class>com.ViewProvisionalMembers</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ViewOutstandingBalances</servlet-name>
         <url-pattern>/ViewOutstandingBalances</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProvisionalMembers</servlet-name>
+        <url-pattern>/ViewProvisionalMembers</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
