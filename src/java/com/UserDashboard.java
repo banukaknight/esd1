@@ -6,6 +6,7 @@
 package com;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author leoed
  */
-public class MainController extends HttpServlet {
+public class UserDashboard extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,24 +38,12 @@ public class MainController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession();
-        
-        if(session.getAttribute("bean") == null){
-            DBBean bean = new DBBean("esddb", "server", "123");
-            session.setAttribute("bean", bean);
-        }
-        
         User sessionUser = (User)session.getAttribute("user");
         
-        if(sessionUser == null){
-            response.sendRedirect("login.jsp");
-        }
-        else if(sessionUser.status.startsWith("APPROVED")){
-            RequestDispatcher view = request.getRequestDispatcher("UserDashboard");
-            view.forward(request, response);
-        }
-        else{
-            response.sendRedirect("admindashdummy.html");
-        }
+        request.setAttribute("member", Members.getMemberById(sessionUser.id, (DBBean)session.getAttribute("bean")));
+        
+        RequestDispatcher view = request.getRequestDispatcher("userDashboard.jsp");
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,7 +61,7 @@ public class MainController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -87,11 +76,7 @@ public class MainController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

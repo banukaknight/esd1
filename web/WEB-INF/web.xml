@@ -40,6 +40,10 @@
         <servlet-name>ViewUserClaimsAndPayments</servlet-name>
         <servlet-class>com.ViewUserClaimsAndPayments</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserDashboard</servlet-name>
+        <servlet-class>com.UserDashboard</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>ViewUserClaimsAndPayments</servlet-name>
         <url-pattern>/ViewClaimsAndPayments</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDashboard</servlet-name>
+        <url-pattern>/UserDashboard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

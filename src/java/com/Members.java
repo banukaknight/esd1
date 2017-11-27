@@ -52,4 +52,13 @@ public class Members {
         
         return outstandingMembers;
     }
+    
+    public static Member getMemberById(String Id, DBBean bean) throws SQLException{
+        ArrayList<Member> allMembers = bean.getMembers();
+        
+        for(Member m : allMembers)
+            if(m.id.equals(Id))
+                return m;
+        return null;
+    }
 }

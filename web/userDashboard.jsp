@@ -1,9 +1,11 @@
+<%-- 
+    Document   : userDashboard
+    Created on : 27-Nov-2017, 17:11:11
+    Author     : leoed
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>User Dash</title>
@@ -13,6 +15,9 @@ and open the template in the editor.
     <body>
         <a href="./Logout">Logout</a>
         <h1>User Dash</h1>
+        <%@ page import="com.Member"%>
+        <%Member member = (Member)request.getAttribute("member");%>
+        <p>Your balance: <% out.print(String.format("£%.2f", member.balance));    %></p>
         <a href="./MakePayment">Make a Payment<br></a>
         <a href="./ViewClaimsAndPayments">View Your Claims and Payments<br></a>
     </body>
