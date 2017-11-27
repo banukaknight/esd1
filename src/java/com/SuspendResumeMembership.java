@@ -89,9 +89,9 @@ public class SuspendResumeMembership extends HttpServlet {
                     b = new DBBean("esddb", "server", "123");
                     session.setAttribute("bean", b);
             }
-            ArrayList<Member> members = b.getMembers();
             if(toSuspend != null)
             {
+                ArrayList<Member> members = b.getMembers();
                 for(Member m : members)
                     m.status = "APPROVED";
                 for(Member m : members)
@@ -103,14 +103,8 @@ public class SuspendResumeMembership extends HttpServlet {
                 }
                 processRequest(request, response);
             }
-            else
-                for(Member m : members)
-                {
-                    m.status = "APPROVED";
-                    b.updateMember(m);
-                }
-            processRequest(request, response);
         } catch (SQLException ex) {}  
+        response.sendRedirect("./MainController");
     }
 
     /**
