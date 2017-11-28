@@ -6,8 +6,10 @@
 package com;
 
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,23 +50,21 @@ public class TotalIncome extends HttpServlet {
             session.setAttribute("bean", b);
         }
         ArrayList<Claim> claims = b.getClaims();
-        ArrayList<Payment> payments = b.getPayments();
+        ArrayList<Member> members = b.getMembers();
         double claimamount = 0;
-        double paymentamount = 0;
-        double totalamount = 0;
+        double chargeamount = 0;
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -1);
         java.util.Date d = cal.getTime();
         for(Claim c : claims)
-            if(d.before(c.date))
+            if(d.before(c.date) && c.status.startsWith("APPROVED"))
                 claimamount +=  c.amount;
-        for(Payment p : payments)
-            if(d.before(p.date))
-                paymentamount += p.amount;
-        totalamount = paymentamount - claimamount;
+        chargeamount = claimamount / members.size();
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
+        chargeamount = Double.parseDouble(df.format(chargeamount));
         request.setAttribute("claimamount", Double.toString(claimamount));
-        request.setAttribute("paymentamount", Double.toString(paymentamount));
-        request.setAttribute("totalamount", Double.toString(totalamount));
+        request.setAttribute("chargeamount", Double.toString(chargeamount));
         request.setAttribute("date", cal);
         RequestDispatcher view = request.getRequestDispatcher("totalIncome.jsp"); 
         view.forward(request, response);
@@ -101,6 +101,32 @@ public class TotalIncome extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            HttpSession session = request.getSession();
+            DBBean b = (DBBean)session.getAttribute("bean");
+            if(b == null)
+            {
+                b = new DBBean("esddb", "server", "123");
+                session.setAttribute("bean", b);
+            }
+            ArrayList<Claim> claims = b.getClaims();
+            ArrayList<Member> members = b.getMembers();
+            double claimamount = 0;
+            double chargeamount = 0;
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.YEAR, -1);
+            java.util.Date d = cal.getTime();
+            for(Claim c : claims)
+                if(d.before(c.date) && c.status.startsWith("APPROVED"))
+                    claimamount +=  c.amount;
+            chargeamount = claimamount / members.size();
+            DecimalFormat df = new DecimalFormat("#.##");
+            df.setRoundingMode(RoundingMode.CEILING);
+            chargeamount = Double.parseDouble(df.format(chargeamount));
+            for(Member m : members)
+            {
+                m.balance += chargeamount;
+                b.updateMember(m);
+            }
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(TotalIncome.class.getName()).log(Level.SEVERE, null, ex);

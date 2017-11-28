@@ -89,10 +89,11 @@ public class MakeClaim extends HttpServlet {
                 b = new DBBean("esddb", "server", "123");
                 session.setAttribute("bean", b);
             }
-            int claimCount = 0;
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.YEAR, -1);
             java.util.Date d = cal.getTime();
+            //AUTOMATICALLY REJECT CLAIMS
+            /*int claimCount = 0;
             for(Claim c : b.getClaims())
                 if(c.mem_id.equals(u.id))
                 {
@@ -104,7 +105,7 @@ public class MakeClaim extends HttpServlet {
                 request.setAttribute("message", "You cannot submit more claims.");
                 processRequest(request, response);
                 return;
-            }
+            }*/
             try{amount = Double.parseDouble(request.getParameter("amount"));}catch(Exception e) {}
             try{rationale = (String)request.getParameter("rationale");}catch(Exception e) {}
             Claim c = new Claim(b.getClaims().size() + 1, u.id, new Date(d.getTime()), rationale, "APPLIED", amount);
