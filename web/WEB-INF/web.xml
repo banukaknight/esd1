@@ -58,7 +58,7 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictedMemberFilter</filter-name>
-        <servlet-name>MakePayment</servlet-name>
+        <servlet-name>MakeClaim</servlet-name>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
