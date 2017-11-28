@@ -39,7 +39,7 @@
                                 <td><%out.print(c.date);%></td>
                                 <td><%out.print(c.rationale);%></td>
                                 <td><%out.print(c.status);%></td>
-                                <td><%out.print(c.amount);%></td>
+                                <td><%out.print("£"+c.amount);%></td>
                             </TR>
                         <%}%>
                     </TABLE><br>
@@ -64,7 +64,7 @@
                                 <td><%out.print(p.id);%></td>
                                 <td><%out.print(p.mem_id);%></td>
                                 <td><%out.print(p.type_of_payment);%></td>
-                                <td><%out.print(p.amount);%></td>
+                                <td><%out.print("£"+p.amount);%></td>
                                 <td><%out.print(p.date);%></td>
                                 <td><%out.print(p.time);%></td>
                             </TR>

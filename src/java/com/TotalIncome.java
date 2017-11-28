@@ -6,9 +6,10 @@
 package com;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,8 +25,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Jake
  */
-@WebServlet(name = "MakeClaim", urlPatterns = {"/MakeClaim"})
-public class MakeClaim extends HttpServlet {
+@WebServlet(name = "TotalIncome", urlPatterns = {"/TotalIncome"})
+public class TotalIncome extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +40,33 @@ public class MakeClaim extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher view = request.getRequestDispatcher("makeClaim.jsp"); 
+        HttpSession session = request.getSession();
+        DBBean b = (DBBean)session.getAttribute("bean");
+        if(b == null)
+        {
+            b = new DBBean("esddb", "server", "123");
+            session.setAttribute("bean", b);
+        }
+        ArrayList<Claim> claims = b.getClaims();
+        ArrayList<Payment> payments = b.getPayments();
+        double claimamount = 0;
+        double paymentamount = 0;
+        double totalamount = 0;
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -1);
+        java.util.Date d = cal.getTime();
+        for(Claim c : claims)
+            if(d.before(c.date))
+                claimamount +=  c.amount;
+        for(Payment p : payments)
+            if(d.before(p.date))
+                paymentamount += p.amount;
+        totalamount = paymentamount - claimamount;
+        request.setAttribute("claimamount", Double.toString(claimamount));
+        request.setAttribute("paymentamount", Double.toString(paymentamount));
+        request.setAttribute("totalamount", Double.toString(totalamount));
+        request.setAttribute("date", cal);
+        RequestDispatcher view = request.getRequestDispatcher("totalIncome.jsp"); 
         view.forward(request, response);
     }
 
@@ -58,7 +85,7 @@ public class MakeClaim extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(MakeClaim.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TotalIncome.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -74,57 +101,10 @@ public class MakeClaim extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession();
-            User u = (User)session.getAttribute("user");
-            DBBean b = (DBBean)session.getAttribute("bean");
-            double amount = 0;
-            String rationale = "";
-            if(u == null)
-            {
-                RequestDispatcher view = request.getRequestDispatcher("login.jsp");
-                view.forward(request, response);
-            }
-            if(b == null)
-            {
-                b = new DBBean("esddb", "server", "123");
-                session.setAttribute("bean", b);
-            }
-            int claimCount = 0;
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.YEAR, -1);
-            java.util.Date d = cal.getTime();
-            for(Claim c : b.getClaims())
-                if(c.mem_id.equals(u.id))
-                {
-                    if(d.before(c.date));
-                        claimCount++;
-                }
-            if(claimCount > 2)
-            {
-                request.setAttribute("message", "You cannot submit more claims.");
-                processRequest(request, response);
-                return;
-            }
-            try{amount = Double.parseDouble(request.getParameter("amount"));}catch(Exception e) {}
-            try{rationale = (String)request.getParameter("rationale");}catch(Exception e) {}
-            Claim c = new Claim(b.getClaims().size() + 1, u.id, new Date(d.getTime()), rationale, "APPLIED", amount);
-            request.setAttribute("message", "");
-            if(c.rationale == null || c.rationale.equals(""))
-            {
-                request.setAttribute("message", request.getAttribute("message") + "A rationale is required.");
-                processRequest(request, response);
-                return;
-            }
-            if(c.amount <= 0)
-            {
-                request.setAttribute("message", request.getAttribute("message") + "An amount above 0 is required.");
-                processRequest(request, response);
-                return;
-            }
-            b.addClaim(c);
-            request.setAttribute("message", "Your claim has been submitted.");
             processRequest(request, response);
-        } catch (SQLException ex) {}
+        } catch (SQLException ex) {
+            Logger.getLogger(TotalIncome.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

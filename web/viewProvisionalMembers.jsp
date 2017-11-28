@@ -36,7 +36,7 @@
                                 <td><%out.print(m.address);%></td>
                                 <td><%out.print(m.dob);%></td>
                                 <td><%out.print(m.dor);%></td>
-                                <td><%out.print(m.balance);%></td>
+                                <td><%out.print("£"+m.balance);%></td>
                             </TR>
                         <%}%>
                     </TABLE>
