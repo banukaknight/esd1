@@ -3,12 +3,42 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/viewMembers.jsp</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/viewProvisionalMembers.jsp</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/Logout.java</file>
             <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/DBBean.java</file>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/login.jsp</file>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/AdminFilter.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/PaymentServlet.java</file>
             <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/Login.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/ViewUserClaimsAndPayments.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/UserDashboard.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/ViewOutstandingBalances.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/RegisterServlet.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/viewOutstandingBalances.jsp</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/Fees.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/login.jsp</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/ViewProvisionalMembers.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/ApproveMemberships.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/NotPermitted.html</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/MemberFilter.java</file>
             <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/LoginServlet.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/ViewMembers.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/Claims.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/admindashdummy.html</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/viewUserClaimsAndPayments.jsp</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/payment.jsp</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/NotSignedInFilter.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/ApproveMembers.jsp</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/RestrictedMemberFilter.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/ViewClaims.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/viewClaims.jsp</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/Members.java</file>
             <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/MainController.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/Payments.java</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/userDashboard.jsp</file>
+            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/SuspendResumeMembership.java</file>
         </group>
     </open-files>
 </project-private>
