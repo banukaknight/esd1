@@ -3,11 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/admindashdummy.html</file>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/TotalIncome.java</file>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/ApproveClaims.java</file>
-            <file>file:/C:/Users/leoed/OneDrive/Documents/GitHub/ESDAssignment/src/java/com/Claims.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/TotalIncomeCalculator.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/web/payment.jsp</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/web/NotPermitted.html</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/web/ApproveMembers.jsp</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/UserDashboard.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/Payments.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/RegisterServlet.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/web/adminDashboard.html</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/TotalIncome.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/web/totalIncome.jsp</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/RegisterMember.java</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/web/ApproveClaims.jsp</file>
+            <file>file:/C:/Users/Jake/Documents/GitHub/ESDAssignment/src/java/com/PaymentServlet.java</file>
         </group>
     </open-files>
 </project-private>

@@ -50,7 +50,6 @@ public class RegisterServlet extends HttpServlet {
         String[] nameSplit = name.split(" ");
         String id = nameSplit[0].charAt(0) + "-" + nameSplit[nameSplit.length - 1];
         ArrayList<User> userList = b.getUsers();
-        Member m;
         User u;
         int tries = 1;
         int idl = id.length();
@@ -59,6 +58,7 @@ public class RegisterServlet extends HttpServlet {
             id = id.substring(0,idl) + tries;
             tries++;
         }
+        Member m;
         Date date = Date.valueOf(request.getParameter("dob"));
         String pw = date.toString();
         String password = "" + pw.charAt(8) + pw.charAt(9) + pw.charAt(5) + pw.charAt(6) + pw.charAt(2) + pw.charAt(3);

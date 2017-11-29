@@ -33,7 +33,7 @@ public class TotalIncomeCalculator {
     public double getChargeTotal(DBBean b) throws SQLException
     {
         ArrayList<Member> members = b.getMembers();
-        return getClaimsTotal(b) / members.size();
+        return calculateTotal(getClaimsTotal(b), members.size());
     }
     public void updateMembers(DBBean b) throws SQLException
     {
@@ -46,5 +46,11 @@ public class TotalIncomeCalculator {
             m.balance += chargeamount;
             b.updateMember(m);
         }
+    }
+
+    private static double calculateTotal(double claims, int membersSize) {
+        com.WebService_Service service = new com.WebService_Service();
+        com.WebService port = service.getWebServicePort();
+        return port.calculateTotal(claims, membersSize);
     }
 }
