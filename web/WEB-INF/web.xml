@@ -38,7 +38,7 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
-        <url-pattern>/admindashdummy.html</url-pattern>
+        <servlet-name>AdminDashboard</servlet-name>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
