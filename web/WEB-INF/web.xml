@@ -54,6 +54,10 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
+        <servlet-name>ApproveClaims</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
         <servlet-name>ApproveMemberships</servlet-name>
     </filter-mapping>
     <filter-mapping>
