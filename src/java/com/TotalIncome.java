@@ -49,20 +49,13 @@ public class TotalIncome extends HttpServlet {
             b = new DBBean("esddb", "server", "123");
             session.setAttribute("bean", b);
         }
-        ArrayList<Claim> claims = b.getClaims();
-        ArrayList<Member> members = b.getMembers();
-        double claimamount = 0;
-        double chargeamount = 0;
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.YEAR, -1);
-        java.util.Date d = cal.getTime();
-        for(Claim c : claims)
-            if(d.before(c.date) && c.status.startsWith("APPROVED"))
-                claimamount +=  c.amount;
-        chargeamount = claimamount / members.size();
+        TotalIncomeCalculator calc = new TotalIncomeCalculator();
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.CEILING);
-        chargeamount = Double.parseDouble(df.format(chargeamount));
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -1);
+        Double claimamount = Double.parseDouble(df.format(calc.getClaimsTotal(b)));
+        Double chargeamount = Double.parseDouble(df.format(calc.getChargeTotal(b)));
         request.setAttribute("claimamount", Double.toString(claimamount));
         request.setAttribute("chargeamount", Double.toString(chargeamount));
         request.setAttribute("date", cal);
@@ -108,25 +101,8 @@ public class TotalIncome extends HttpServlet {
                 b = new DBBean("esddb", "server", "123");
                 session.setAttribute("bean", b);
             }
-            ArrayList<Claim> claims = b.getClaims();
-            ArrayList<Member> members = b.getMembers();
-            double claimamount = 0;
-            double chargeamount = 0;
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.YEAR, -1);
-            java.util.Date d = cal.getTime();
-            for(Claim c : claims)
-                if(d.before(c.date) && c.status.startsWith("APPROVED"))
-                    claimamount +=  c.amount;
-            chargeamount = claimamount / members.size();
-            DecimalFormat df = new DecimalFormat("#.##");
-            df.setRoundingMode(RoundingMode.CEILING);
-            chargeamount = Double.parseDouble(df.format(chargeamount));
-            for(Member m : members)
-            {
-                m.balance += chargeamount;
-                b.updateMember(m);
-            }
+            TotalIncomeCalculator calc = new TotalIncomeCalculator();
+            calc.updateMembers(b);
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(TotalIncome.class.getName()).log(Level.SEVERE, null, ex);

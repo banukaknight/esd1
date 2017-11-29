@@ -15,7 +15,7 @@
         <form action="RegisterServlet" method="post">  
         Name:<input type="text" name="name"><br>  
         Address:<input type="text" name = "address"><br>  
-        Date of birth:<input type="date" name = "dob"><br>  
+        Date of birth:<input type="date" name = "dob" value="2017-01-01"><br>  
         <input type="submit" value="Register">  
         <br>
         <%
