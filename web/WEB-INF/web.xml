@@ -118,6 +118,10 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminDashboard</servlet-name>
+        <servlet-class>com.AdminDashboard</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -169,6 +173,10 @@
     <servlet-mapping>
         <servlet-name>ApproveClaims</servlet-name>
         <url-pattern>/ApproveClaims</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDashboard</servlet-name>
+        <url-pattern>/AdminDashboard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

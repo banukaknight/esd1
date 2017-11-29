@@ -6,9 +6,7 @@
 package com;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author leoed
  */
-public class MainController extends HttpServlet {
+public class AdminDashboard extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,30 +28,13 @@ public class MainController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        HttpSession session = request.getSession();
-        
-        if(session.getAttribute("bean") == null){
-            DBBean bean = new DBBean("esddb", "server", "123");
-            session.setAttribute("bean", bean);
-        }
-        
-        User sessionUser = (User)session.getAttribute("user");
-        
-        if(sessionUser == null){
-            response.sendRedirect("Login");
-        }
-        else if(sessionUser.status.startsWith("APPROVED")){
-            response.sendRedirect("UserDashboard");
-        }
-        else{
-            response.sendRedirect("AdminDashboard");
-        }
+
+        RequestDispatcher view = request.getRequestDispatcher("adminDashboard.html");
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,11 +49,7 @@ public class MainController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -86,11 +63,7 @@ public class MainController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
