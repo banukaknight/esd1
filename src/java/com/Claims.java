@@ -23,4 +23,29 @@ public class Claims {
         
         return membersClaims;
     }
+    
+    //bk
+    
+    public static ArrayList<Claim> getPendingClaims(DBBean bean) throws SQLException{
+       ArrayList<Claim> allClaims = bean.getClaims();
+       ArrayList<Claim> newClaims = new ArrayList<>();
+        
+       
+        for(Claim c : allClaims){
+        //   if(Fees.initialFeePaid(c.mem_id, bean))
+            if(c.status.equalsIgnoreCase("APPLIED"))
+                newClaims.add(c);
+        }
+        return newClaims;
+    }
+    
+        
+       public static void approveClaim(Claim c, DBBean bean){
+        c.status = "APPROVED";
+        bean.updateClaim(c);
+    }
+    
+    
+    
+    
 }
