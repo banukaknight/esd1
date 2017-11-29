@@ -75,6 +75,10 @@
         <servlet-class>com.ApproveMemberships</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ApproveClaims</servlet-name>
+        <servlet-class>com.ApproveClaims</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>MakePayment</servlet-name>
         <servlet-class>com.MakePayment</servlet-class>
     </servlet>
@@ -157,6 +161,10 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApproveClaims</servlet-name>
+        <url-pattern>/ApproveClaims</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

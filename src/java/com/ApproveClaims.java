@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author leoed
  */
-public class ApproveClaimss extends HttpServlet {
+public class ApproveClaims extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,7 +61,7 @@ public class ApproveClaimss extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ApproveClaimss.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApproveClaims.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -85,7 +85,7 @@ public class ApproveClaimss extends HttpServlet {
             try {
                 unapprovedClaims = Claims.getPendingClaims(bean);
             } catch (SQLException ex) {
-                Logger.getLogger(ApproveClaimss.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ApproveClaims.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             for (String id : checkedClaims) {
@@ -95,7 +95,7 @@ public class ApproveClaimss extends HttpServlet {
                        
                             claimsToApprove.add(c);
                         } catch (SQLException ex) {
-                        Logger.getLogger(ApproveClaimss.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(ApproveClaims.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 
@@ -109,7 +109,7 @@ public class ApproveClaimss extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ApproveClaimss.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApproveClaims.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
