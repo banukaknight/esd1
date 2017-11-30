@@ -7,6 +7,7 @@ import java.sql.Date;
  * @author Jake
  */
 public class Claim {
+    //Claim Attributes
     public int id;
     public String mem_id;
     public Date date;
