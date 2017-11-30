@@ -1,4 +1,3 @@
-
 package com;
 
 /**
@@ -6,6 +5,7 @@ package com;
  * @author Jake
  */
 public class User {
+    //User Attributes
     public String id;
     public String password;
     public String status; 
