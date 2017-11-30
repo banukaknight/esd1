@@ -45,6 +45,11 @@ public class Claims {
         bean.updateClaim(c);
     }
     
+    public static void rejectClaim(Claim c, DBBean bean){
+        c.status = "REJECTED";
+        bean.updateClaim(c);
+    }
+    
     
     
     
