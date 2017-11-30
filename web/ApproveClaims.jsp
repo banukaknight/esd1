@@ -9,12 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Approve Claims</title>
+        <title>Approve or Reject Claims</title>
     </head>
     <body>
         <a href="./MainController">Dash</a>
         <a href="./Logout">Logout</a>
-        <h1>Approve Claims</h1>
+        <h1>Approve or Reject Claims</h1>
         <div id="checkboxes">
             <%@ page import="java.util.ArrayList"%>
             <%@ page import="com.Claim"%>
