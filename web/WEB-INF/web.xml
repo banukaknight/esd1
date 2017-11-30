@@ -58,6 +58,10 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
+        <servlet-name>RejectClaims</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
         <servlet-name>ApproveMemberships</servlet-name>
     </filter-mapping>
     <filter-mapping>
@@ -81,6 +85,10 @@
     <servlet>
         <servlet-name>ApproveClaims</servlet-name>
         <servlet-class>com.ApproveClaims</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RejectClaims</servlet-name>
+        <servlet-class>com.RejectClaims</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MakePayment</servlet-name>
@@ -173,6 +181,10 @@
     <servlet-mapping>
         <servlet-name>ApproveClaims</servlet-name>
         <url-pattern>/ApproveClaims</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RejectClaims</servlet-name>
+        <url-pattern>/RejectClaims</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminDashboard</servlet-name>
