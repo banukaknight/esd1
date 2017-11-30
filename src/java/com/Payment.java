@@ -1,4 +1,3 @@
-
 package com;
 
 import java.sql.Date;
@@ -9,6 +8,7 @@ import java.sql.Time;
  * @author Jake
  */
 public class Payment {
+    //Payment Attributes
     public int id;
     public String mem_id;
     public String type_of_payment;
