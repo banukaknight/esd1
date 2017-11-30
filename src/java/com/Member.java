@@ -1,4 +1,3 @@
-
 package com;
 
 import java.sql.Date;
@@ -8,6 +7,7 @@ import java.sql.Date;
  * @author Jake
  */
 public class Member {
+    //Member attributes
     public String id;
     public String name;
     public String address;
