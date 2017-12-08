@@ -29,6 +29,7 @@ public class ChangePW extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         RequestDispatcher view = request.getRequestDispatcher("changePW.jsp");
         view.forward(request, response);
     }
@@ -65,9 +66,9 @@ public class ChangePW extends HttpServlet {
             User u = (User) session.getAttribute("user");
             DBBean b = (DBBean) session.getAttribute("bean");
 
-            String oldpw = request.getParameter("oldpw");
-            String newpw1 = request.getParameter("newpw1");
-            String newpw2 = request.getParameter("newpw2");
+            String oldpw = request.getParameter("oldpw").trim();
+            String newpw1 = request.getParameter("newpw1").trim();
+            String newpw2 = request.getParameter("newpw2").trim();
 
             //check if password entered matches
             if (oldpw.equals(u.password)) {
@@ -82,6 +83,7 @@ public class ChangePW extends HttpServlet {
             } else {
                 request.setAttribute("message", " Password incorrect. Please try again.");
             }
+            
             processRequest(request, response);
 
         } catch (Exception e) {
