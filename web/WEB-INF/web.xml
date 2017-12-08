@@ -130,6 +130,10 @@
         <servlet-name>AdminDashboard</servlet-name>
         <servlet-class>com.AdminDashboard</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePWs</servlet-name>
+        <servlet-class>com.ChangePW</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -189,6 +193,10 @@
     <servlet-mapping>
         <servlet-name>AdminDashboard</servlet-name>
         <url-pattern>/AdminDashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePWs</servlet-name>
+        <url-pattern>/ChangePWs</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
