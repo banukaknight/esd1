@@ -34,9 +34,8 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        DBBean b = (DBBean)session.getAttribute("bean");
-        if(b == null)
-        {
+        DBBean b = (DBBean) session.getAttribute("bean");
+        if (b == null) {
             b = new DBBean("esddb", "server", "123");
             session.setAttribute("bean", b);
         }
@@ -48,32 +47,34 @@ public class RegisterServlet extends HttpServlet {
         User u;
         int tries = 1;
         int idl = id.length();
-        while(!userExists(id,userList).equals(""))    
-        {
-            id = id.substring(0,idl) + tries;
+        while (!userExists(id, userList).equals("")) {
+            id = id.substring(0, idl) + tries;
             tries++;
         }
         Member m;
         Date date = Date.valueOf(request.getParameter("dob"));
         String pw = date.toString();
         String password = "" + pw.charAt(8) + pw.charAt(9) + pw.charAt(5) + pw.charAt(6) + pw.charAt(2) + pw.charAt(3);
-        m = new Member(id,name,request.getParameter("address"),date,new Date(d.getTime()),"APPLIED",10);
-        u = new User(id,password,"APPROVED");
+        m = new Member(id, name, request.getParameter("address"), date, new Date(d.getTime()), "APPLIED", 10);
+        u = new User(id, password, "APPROVED");
         b.addUser(u);
         b.addMember(m);
-        request.setAttribute("message", "Your new username is: " + id);
+
+        request.setAttribute("message", "Your New Username: " + id +" ___Password: " + password);
         RequestDispatcher view = request.getRequestDispatcher("login.jsp");
         view.forward(request, response);
+
     }
 
-    private String userExists(String id, ArrayList<User> userlist)
-    {
-        for(User u : userlist)
-            if(u.id.equals(id))
+    private String userExists(String id, ArrayList<User> userlist) {
+        for (User u : userlist) {
+            if (u.id.equals(id)) {
                 return u.id;
+            }
+        }
         return "";
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
