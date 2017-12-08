@@ -2,7 +2,7 @@ package com;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.sql.Date;
 /**
  *
  * @author leoed
@@ -36,7 +36,7 @@ public class Members {
         bean.updateMember(m);
     }
     
-    public static ArrayList<Member> getMembersWithOutstandingBalances(DBBean bean) throws SQLException{
+     public static ArrayList<Member> getMembersWithOutstandingBalances(DBBean bean) throws SQLException{
         ArrayList<Member> outstandingMembers = new ArrayList<>();
         ArrayList<Member> allMembers = bean.getMembers();
         
