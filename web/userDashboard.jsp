@@ -17,7 +17,7 @@
         <h1>User Dash</h1>
         <%@ page import="com.Member"%>
         <%Member member = (Member)request.getAttribute("member");%>
-        <p>Your balance: <% out.print(String.format("Â£%.2f", member.balance));    %></p>
+        <p>Your balance: <% out.print(String.format("£%.2f", member.balance));    %></p>
         <a href="./MakePayment">Make a Payment<br></a>
         <a href="./MakeClaim">Make a Claim<br></a>
         <a href="./ViewClaimsAndPayments">View Your Claims and Payments<br></a>

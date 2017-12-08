@@ -34,7 +34,7 @@ public class MakeClaim extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher view = request.getRequestDispatcher("makeClaim.jsp"); 
+        RequestDispatcher view = request.getRequestDispatcher("makeClaim.jsp");
         view.forward(request, response);
     }
 
@@ -70,17 +70,15 @@ public class MakeClaim extends HttpServlet {
             throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
-            User u = (User)session.getAttribute("user");
-            DBBean b = (DBBean)session.getAttribute("bean");
+            User u = (User) session.getAttribute("user");
+            DBBean b = (DBBean) session.getAttribute("bean");
             double amount = 0;
             String rationale = "";
-            if(u == null)
-            {
+            if (u == null) {
                 RequestDispatcher view = request.getRequestDispatcher("login.jsp");
                 view.forward(request, response);
             }
-            if(b == null)
-            {
+            if (b == null) {
                 b = new DBBean("esddb", "server", "123");
                 session.setAttribute("bean", b);
             }
@@ -101,18 +99,22 @@ public class MakeClaim extends HttpServlet {
                 processRequest(request, response);
                 return;
             }*/
-            try{amount = Double.parseDouble(request.getParameter("amount"));}catch(Exception e) {}
-            try{rationale = (String)request.getParameter("rationale");}catch(Exception e) {}
+            try {
+                amount = Double.parseDouble(request.getParameter("amount"));
+            } catch (Exception e) {
+            }
+            try {
+                rationale = (String) request.getParameter("rationale");
+            } catch (Exception e) {
+            }
             Claim c = new Claim(b.getClaims().size() + 1, u.id, new Date(d.getTime()), rationale, "APPLIED", amount);
             request.setAttribute("message", "");
-            if(c.rationale == null || c.rationale.equals(""))
-            {
+            if (c.rationale == null || c.rationale.equals("")) {
                 request.setAttribute("message", request.getAttribute("message") + "A rationale is required.");
                 processRequest(request, response);
                 return;
             }
-            if(c.amount <= 0)
-            {
+            if (c.amount <= 0) {
                 request.setAttribute("message", request.getAttribute("message") + "An amount above 0 is required.");
                 processRequest(request, response);
                 return;
@@ -120,7 +122,8 @@ public class MakeClaim extends HttpServlet {
             b.addClaim(c);
             request.setAttribute("message", "Your claim has been submitted.");
             processRequest(request, response);
-        } catch (SQLException ex) {}
+        } catch (SQLException ex) {
+        }
     }
 
     /**
