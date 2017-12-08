@@ -110,6 +110,7 @@ public class ChangeUinfo extends HttpServlet {
 
                     request.setAttribute("message", " Changes made successfully.");
                 } catch (Exception e) {
+                    request.setAttribute("message", " Something went wrong can you find what.");
                 }
 
             }
