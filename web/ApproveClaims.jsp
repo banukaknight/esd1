@@ -14,6 +14,8 @@
     <body>
         <a href="./MainController">Dash</a>
         <a href="./Logout">Logout</a>
+        <a href="./ViewClaims">View Past Claims<br></a>
+        
         <h1>Approve or Reject Claims</h1>
         <div id="checkboxes">
             <%@ page import="java.util.ArrayList"%>
