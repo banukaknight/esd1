@@ -1,13 +1,19 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +21,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Jake
+ * @author bv2-paniyanduw
  */
-public class MakePayment extends HttpServlet {
+@WebServlet(name = "changeUinfo", urlPatterns = {"/changeUinfo"})
+public class ChangeUinfo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,34 +36,31 @@ public class MakePayment extends HttpServlet {
      * @throws IOException if an I/O error occurs
      * @throws java.sql.SQLException
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
-        DBBean b = (DBBean)session.getAttribute("bean");
-        if(user == null)
-        {
+        User u = (User) session.getAttribute("user");
+        DBBean b = (DBBean) session.getAttribute("bean");
+        if (u == null) {
             RequestDispatcher view = request.getRequestDispatcher("login.jsp");
             view.forward(request, response);
         }
-        if(b == null)
-        {
+        if (b == null) {
             b = new DBBean("esddb", "server", "123");
             session.setAttribute("bean", b);
         }
         ArrayList<Member> members = b.getMembers();
-        for(int i = 0; i < members.size(); i++)
-        {
-            if(members.get(i).id.equals(user.id))
-            {
+        for (int i = 0; i < members.size(); i++) {
+            if (members.get(i).id.equals(u.id)) {
                 session.setAttribute("member", members.get(i));
-                request.setAttribute("balance", members.get(i).balance);
             }
         }
-        RequestDispatcher view = request.getRequestDispatcher("payment.jsp");
+
+        request.setAttribute("member", Members.getMemberById(u.id, (DBBean) session.getAttribute("bean")));
+
+        RequestDispatcher view = request.getRequestDispatcher("changeUinfo.jsp");
         view.forward(request, response);
     }
 
@@ -75,7 +79,7 @@ public class MakePayment extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            System.out.println("ERROR INGET");
+            Logger.getLogger(ChangeUinfo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,10 +94,45 @@ public class MakePayment extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // check entered password against one on database,
+        // if matched, submit the changes
         try {
+            HttpSession session = request.getSession();
+            User u = (User) session.getAttribute("user");
+            DBBean b = (DBBean) session.getAttribute("bean");
+            Member m = (Member) session.getAttribute("member");
+
+            String myname = request.getParameter("myname").trim();
+            String myadr = request.getParameter("myadr").trim();
+            Date mydob = Date.valueOf(request.getParameter("mydob"));
+            String mypw = request.getParameter("mypw").trim();
+
+            //check if password entered matches & no fields are left null
+            if (!mypw.equals(u.password)) {
+
+                request.setAttribute("message", " Password incorrect. Please try again.");
+            } else if (myname.trim().equals("") || myadr.trim().equals("") || mydob.toString().equals("")) {
+                request.setAttribute("message", " Please fill all fields and Try again.");
+            } else {
+                try {
+
+                    m.name = myname;
+                    m.address = myadr;
+                    m.dob = mydob;
+
+                    b.updateMember(m);
+
+                    request.setAttribute("message", " Changes made successfully.");
+                } catch (Exception e) {
+                    request.setAttribute("message", " Something went wrong can you find what.");
+                }
+
+            }
+
             processRequest(request, response);
         } catch (SQLException ex) {
-            System.out.println("ERROR IN POST");
+            Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

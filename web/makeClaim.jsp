@@ -15,12 +15,17 @@
         <a href="./MainController">Dash</a>
         <a href="./Logout">Logout</a>
         <h1>Make Claim</h1>
-        <form action="MakeClaim" method="post">  
-            Amount:<input type="text" name="amount"><br>  
-            Rationale:<input type="text" name="rationale"><br>   
-        <input type="submit" value="Submit"><br> 
-        </form>
-        <%  String message = (String)request.getAttribute("message");
-            if(message != null)out.print(message);%>
+        <form action="MakeClaim" method="post"> 
+        <table>
+            <tr><td>Amount: </td><td><input type="text" name="amount"></td></tr>  
+            <tr><td>Rationale: </td><td><input type="text" name="rationale"></td></tr>  
+            <tr><td></td><td><input type="submit" value="Submit"></td></tr>
+            </form>
+        </table>
+            <br>
+        <%  String message = (String) request.getAttribute("message");
+            if (message != null) {
+                out.print(message);
+            }%>
     </body>
 </html>

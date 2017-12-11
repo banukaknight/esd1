@@ -34,8 +34,17 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>MemberFilter</filter-name>
+        <servlet-name>ChangePW</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MemberFilter</filter-name>
+        <servlet-name>ChangeUinfo</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MemberFilter</filter-name>
         <servlet-name>UserDashboard</servlet-name>
     </filter-mapping>
+    
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <servlet-name>AdminDashboard</servlet-name>
@@ -131,8 +140,12 @@
         <servlet-class>com.AdminDashboard</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ChangePWs</servlet-name>
+        <servlet-name>ChangePW</servlet-name>
         <servlet-class>com.ChangePW</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeUinfo</servlet-name>
+        <servlet-class>com.ChangeUinfo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
@@ -195,8 +208,12 @@
         <url-pattern>/AdminDashboard</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ChangePWs</servlet-name>
-        <url-pattern>/ChangePWs</url-pattern>
+        <servlet-name>ChangePW</servlet-name>
+        <url-pattern>/ChangePW</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeUinfo</servlet-name>
+        <url-pattern>/ChangeUinfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

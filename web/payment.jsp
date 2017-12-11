@@ -17,18 +17,26 @@
         <a href="./MainController">Dash</a>
         <a href="./Logout">Logout</a>
         <h1>Make a new payment</h1>
-        <% 
-           String err = "";
-           double balance = 0.00; 
-           try{balance = Double.parseDouble(request.getAttribute("balance").toString());}catch(Exception e){err = "Member doesn't exist, please log in and try again.";}%>
-        Your balance is: <%= balance %>
-        <br><%= err %>
+        <%
+            String err = "";
+            double balance = 0.00;
+            try {
+                balance = Double.parseDouble(request.getAttribute("balance").toString());
+            } catch (Exception e) {
+                err = "Member doesn't exist, please log in and try again.";
+            }%>
+        Your balance is: <%= balance%>
+        <br><%= err%>
         <form action="PaymentServlet" method="post">  
-        Amount:<input type="text" name="amount"><br>  
-        Bank no.:<input type="text"><br>  
-        Sort code:<input type="text"><br>  
-        <input type="submit" value="Pay">  
-    </form>
-        
+            <br>
+            <table>            
+                <tr><td>Amount: </td><td><input type="text" name="amount"></td></tr>  
+                <tr><td>Bank no.: </td><td><input type="text"></td></tr>
+                <tr><td>Sort code: </td><td><input type="text"></td></tr> 
+                <tr><td></td><td><input type="submit" value="Pay"></td></tr> 
+            </table>
+
+        </form>
+
     </body>
 </html>
