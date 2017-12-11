@@ -110,11 +110,18 @@ public class RestrictedMemberFilter implements Filter {
         } catch (SQLException ex) {
             Logger.getLogger(RestrictedMemberFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        //make sure members with outstanding balance cannot make claims
         if((currentMember != null) && (currentMember.status.startsWith("SUSPENDED") || currentMember.status.startsWith("APPLIED"))){
             res.sendRedirect("NotPermitted.html");
             return;
         }
+         if((currentMember != null) && (currentMember.balance!=0)){
+            res.sendRedirect("NotPermitted2.html");
+            return;
+        }
+        
+        
+        
         
         chain.doFilter(request, response);
     }
