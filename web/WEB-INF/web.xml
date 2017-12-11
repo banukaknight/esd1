@@ -34,8 +34,17 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>MemberFilter</filter-name>
+        <servlet-name>ChangePW</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MemberFilter</filter-name>
+        <servlet-name>ChangeUinfo</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MemberFilter</filter-name>
         <servlet-name>UserDashboard</servlet-name>
     </filter-mapping>
+    
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <servlet-name>AdminDashboard</servlet-name>

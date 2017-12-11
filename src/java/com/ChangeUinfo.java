@@ -6,9 +6,9 @@
 package com;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -42,6 +42,22 @@ public class ChangeUinfo extends HttpServlet {
 
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
+        DBBean b = (DBBean) session.getAttribute("bean");
+        if (u == null) {
+            RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+            view.forward(request, response);
+        }
+        if (b == null) {
+            b = new DBBean("esddb", "server", "123");
+            session.setAttribute("bean", b);
+        }
+        ArrayList<Member> members = b.getMembers();
+        for (int i = 0; i < members.size(); i++) {
+            if (members.get(i).id.equals(u.id)) {
+                session.setAttribute("member", members.get(i));
+            }
+        }
+
         request.setAttribute("member", Members.getMemberById(u.id, (DBBean) session.getAttribute("bean")));
 
         RequestDispatcher view = request.getRequestDispatcher("changeUinfo.jsp");
@@ -104,7 +120,6 @@ public class ChangeUinfo extends HttpServlet {
                     m.name = myname;
                     m.address = myadr;
                     m.dob = mydob;
-                    m.name = "Hello World3";
 
                     b.updateMember(m);
 

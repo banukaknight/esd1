@@ -19,12 +19,12 @@
         <%Member member = (Member) request.getAttribute("member");%>
         <p>User name: <% out.print(member.name);    %><br>
         Your balance: <% out.print(String.format("£%.2f", member.balance));%></p>
-                
+               
     <a href="./MakePayment">Make a Payment<br></a>
     <a href="./MakeClaim">Make a Claim<br></a>
     <a href="./ViewClaimsAndPayments">View Your Claims and Payments<br></a>
     <a href="./ChangePW">Change Password<br></a>
-    <a href="./ChangeUinfo">View and Change Info<br></a>
+    <a href="./ChangeUinfo">View and Change User Info<br></a> 
     
 
 

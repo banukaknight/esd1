@@ -5,51 +5,54 @@
     
     Give user the chance to change their Name, address and DOB
 --%>
+<%@page import="java.sql.Date"%>
+<%@page import="com.Member"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%Member member = (Member) request.getAttribute("member");%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>User Info</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Info</title>
     </head>
     <body>
         <a href="./MainController">Dash</a>
-        <a href="./Logout">Logout</a> <h1>User Info</h1>
-        <%@ page import="com.Member"%>
-        <%Member member = (Member) request.getAttribute("member");%>
+        <a href="./Logout">Logout</a> 
 
-        <table>
-            <tr>
-                <td>User Name:</td>
-                <td><% out.print(member.name); %></td> 
-            </tr>
-            <tr>
-                <td>User ID</td>
-                <td><% out.print(member.id); %></td> 
-            </tr>
-            <tr>
-                <td>Address:</td>
-                <td><% out.print(member.address); %></td> 
-            </tr>
-            <tr>
-                <td>Date of Birth:</td>
-                <td><% out.print(member.dob); %></td> 
-            </tr>
-            <tr>
-                <td>Date of Registration:</td>
-                <td><% out.print(member.dor); %></td> 
-            </tr>
-            <tr>
-                <td>Balance:</td>
-                <td><% out.print(String.format("£%.2f", member.balance));%></td> 
-            </tr>
+        <h1>User Info</h1>
 
-            <tr> </tr><tr> </tr>
-        </table> 
+        <form action="ChangeUinfo" method="post">  
 
-        <form action="changeUinfo" method="post">  
+            <table>
+                <tr>
+                    <td>User Name:</td>
+                    <td><% out.print(member.name); %></td> 
+                </tr>
+                <tr>
+                    <td>User ID</td>
+                    <td><% out.print(member.id); %></td> 
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td><% out.print(member.address); %></td> 
+                </tr>
+                <tr>
+                    <td>Date of Birth:</td>
+                    <td><% out.print(member.dob); %></td> 
+                </tr>
+                <tr>
+                    <td>Date of Registration:</td>
+                    <td><% out.print(member.dor); %></td> 
+                </tr>
+                <tr>
+                    <td>Balance:</td>
+                    <td><% out.print(String.format("£%.2f", member.balance));%></td> 
+                </tr>
+
+                <tr> </tr><tr> </tr>
+            </table> 
 
             <h3>Edit Info</h3> 
             <table>
@@ -75,14 +78,9 @@
                     <td><input type="submit" value="Submit"></td>
                 </tr>
             </table> 
-                <br> <br> 
+            <br> <br> 
         </form>
-                
-        <%  String message = (String) request.getAttribute("message");
-            if (message != null) {
-                out.print(message);
 
-            }%>
 
 
     </body>
